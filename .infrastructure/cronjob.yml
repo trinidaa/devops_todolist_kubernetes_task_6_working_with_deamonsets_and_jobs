@@ -14,10 +14,7 @@ spec:
      template:
        spec:
          containers:
-         - name: cronjob_pod
-           image: busybox
-           command:
-           - /bin/sh
-           - -c
-           - curl todoapp-service:8081/api/health
+         - name: cronjob-pod
+           image: ikulyk404/busyboxplus:curl
+           command: ["/bin/sh", "-c", "curl http://todoapp-service:8081/api/health"]
          restartPolicy: OnFailure
