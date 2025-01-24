@@ -16,15 +16,16 @@ spec:
    spec:
      containers:
      - name: mate-server-daemon
-       image: ikulyk404/busyboxplus:curl
-       command: ["/bin/sh", "-c", "while true; do curl http://todoapp-service:8081/api/health; sleep 5; done"]
+       image: curlimages/curl:latest
+       command: ["/bin/sh", "-c", "while true; do curl --connect-timeout 5 --max-time 5 http://todoapp-service:8083/api/health; sleep 5; done"]
        resources:
          requests:
            cpu: "100m"
-           memory: "100Mi"
+           memory: "128Mi"
          limits:
            cpu: "200m"
-           memory: "200Mi"
+           memory: "256Mi"
        ports:
-       - containerPort: 80
+       - containerPort: 81
          hostPort: 30008
+     dnsPolicy: ClusterFirst
